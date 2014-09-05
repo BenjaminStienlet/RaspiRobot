@@ -1,0 +1,73 @@
+:root {
+  --main-bg-color: #eee;
+  --main-color: #377ba8;
+}
+
+body { 
+	font-family: sans-serif; 
+	background: var(--main-bg-color); 
+	margin: 0px;
+}
+
+nav {
+	font-family: 'Impact', fantasy;
+	font-size: 32px;
+	vertical-align: middle;
+	text-transform: uppercase;
+	background: var(--main-color);
+	color: var(--main-bg-color);
+	height: 40px;
+	margin: 0px;
+}
+nav > ul {
+	margin: 0px;
+	padding: 0px;
+	height: 100%;
+}
+li.nav { 
+	display: inline;
+	height: 32px;
+	padding: 4px 4px 04px 4px;
+}
+li.nav a {
+	text-decoration: none;
+	color: var(--main-bg-color);
+}
+li.current a {
+	text-decoration: none;
+	color: var(--main-color);
+}
+.align-left { 
+	float: left;
+	margin-right: 10px;
+}
+.align-right { 
+	float: right;
+	margin-left: 10px; 
+}
+.current { 
+	background: var(--main-bg-color);
+	color: var(--main-color);
+}
+.icon {
+	position: relative;
+	width: 32px;
+	height: 32px;
+	display: block;
+	fill: var(--main-bg-color);
+}
+.current .icon {
+	fill: var(--main-color);
+}
+
+main {
+	margin: 0px;
+}
+
+.centeredImage { 
+	text-align: center; 
+	vertical-align: middle;
+	margin-top: 0px; 
+	margin-bottom: 0px; 
+	padding: 2px; 
+}

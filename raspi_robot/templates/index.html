@@ -1,38 +1,18 @@
 {% extends "base.html" %}
+
+{% block head %}
+
+{% endblock %}
+
 {% block body %}
 
-<head>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
-</head>
+  <p class="centeredImage"><img id="stream" src="http://192.168.0.1:9000/?action=stream"></p>
 
-<h2>Controller</h2><br>
-<h3>Servo</h3><br>
-Servo angle: <span id="angle"></span><br>
-<div>
-      <label for="Angle">Angle (between 80 and 217):</label>
-      <input type="number" name="angle" min="80" max="217" id="new_angle" value="80"/>
-      <input type="submit" id="submit_angle" value="submit" />
-</div>
-<br><br>
-Camera servo angle: <span id="camera_angle"></span><br>
-<div>
-      <label for="Angle">Angle (between 80 and 217):</label>
-      <input type="number" name="camera_angle" min="80" max="217" id="new_camera_angle" value="80"/>
-      <input type="submit" id="submit_camera_angle" value="submit" />
-</div>
-<br><br>
-<h3>Motor</h3><br>
-Motor speed: <span id="speed"></span><br>
-<div>
-      <label for="Speed">Angle (between -100 and 100):</label>
-      <input type="number" name="speed" min="-100" max="100" id="new_speed" value="0"/>
-      <input type="submit" id="submit_speed" value="submit" />
-</div>
-<br><br>
+{% endblock %}
 
-<h2>Stream</h2><br>
-<p class="centeredImage"><img src="http://192.168.0.33:9000/?action=stream" width="640"></p>
-<br><br>
+{% block scripts %}
+
+  <script type="text/javascript" s`rc="{{ url_for('static', filename='js/control.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/scale_image.js') }}"></script>
 
 {% endblock %}

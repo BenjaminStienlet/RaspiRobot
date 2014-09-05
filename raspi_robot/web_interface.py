@@ -10,6 +10,14 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route('/log.html')
+def log():
+    return render_template('log.html')
+
+@app.route('/settings.html')
+def settings():
+    return render_template('settings.html')
+
 
 class WebInterface(object):
 
