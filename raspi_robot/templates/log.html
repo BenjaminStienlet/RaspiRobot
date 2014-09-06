@@ -1,15 +1,27 @@
 {% extends "base.html" %}
 
 {% block head %}
-
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style/table.css') }}">
 {% endblock %}
 
 {% block body %}
 
-	log.html
+	<table id="log_table">
+		<tr>
+			<th class="type">Type</th>
+			<th class="time">Time</th>
+			<th class="module">Module</th>
+			<th class="description">Description</th>
+		</tr>
+		<tbody>
+
+		</tbody>
+	</table>
 
 {% endblock %}
 
 {% block scripts %}
+
+	<script src="js/log_listener.js"></script>
 
 {% endblock %}

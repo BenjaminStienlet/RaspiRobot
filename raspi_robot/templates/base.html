@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>RaspiRobot</title>
-	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style/style.css') }}">	
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style/navigation.css') }}">
 	<link rel='shortcut icon' type='image/x-icon' href="{{ url_for('static', filename='images/favicon.ico') }}" />
 	{% block head %}{% endblock %}
 </head>
@@ -39,8 +39,12 @@
  		{% block body %}{% endblock %}
  	</main>
 
- 	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-1.11.1.min.js') }}"></script>
-  	<script type="text/javascript" src="{{ url_for('static', filename='js/nav.js') }}"></script>
+ 	<script>
+ 		var ip_addr = "{{ ip_addr }}";
+ 		console.info('ip address = ' + ip_addr);
+ 	</script>
+ 	<script src="{{ url_for('static', filename='js/jquery-1.11.1.min.js') }}"></script>
+  	<script src="{{ url_for('static', filename='js/nav.js') }}"></script>
   	<script>
       var url = "{{ url_for('static', filename='images/icons.svg') }}";
       var c = new XMLHttpRequest(); c.open('GET', url, false); c.setRequestHeader('Content-Type', 'text/xml'); c.send();

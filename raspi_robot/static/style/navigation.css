@@ -63,11 +63,3 @@ li.current a {
 main {
 	margin: 0px;
 }
-
-.centeredImage { 
-	text-align: center; 
-	vertical-align: middle;
-	margin-top: 0px; 
-	margin-bottom: 0px; 
-	padding: 2px; 
-}

@@ -3,20 +3,24 @@ from threading import Thread
 from flask import Flask, render_template
 from flask.ext.socketio import SocketIO, emit
 
+import socket
+
 
 app = Flask(__name__)
 
+ip_addr = socket.gethostbyname(socket.getfqdn())
+
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', ip_addr=ip_addr)
 
 @app.route('/log.html')
 def log():
-    return render_template('log.html')
+    return render_template('log.html', ip_addr=ip_addr)
 
 @app.route('/settings.html')
 def settings():
-    return render_template('settings.html')
+    return render_template('settings.html', ip_addr=ip_addr)
 
 
 class WebInterface(object):
