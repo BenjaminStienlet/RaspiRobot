@@ -2,7 +2,7 @@
 from abc import ABCMeta
 from pyfirmata import Arduino
 
-from raspi_robot.pins.pins.pin import Pin
+from raspi_robot.pin.pin.pin import Pin
 
 
 class ArduinoPin(Pin):

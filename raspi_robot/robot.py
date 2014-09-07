@@ -1,8 +1,8 @@
 
-from raspi_robot.components.servo import Servo
-from raspi_robot.components.motor import Motor
-from raspi_robot.components.distance_monitor import DistanceMonitor
-from raspi_robot.pins.pin_layout.gpio_pin_layout import GPIOPinLayout
+from raspi_robot.component.servo import Servo
+from raspi_robot.component.motor import Motor
+from raspi_robot.component.distance_monitor import DistanceMonitor
+from raspi_robot.pin.pin_layout.gpio_pin_layout import GPIOPinLayout
 
 
 class Robot(object):

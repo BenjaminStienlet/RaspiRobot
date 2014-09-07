@@ -6,7 +6,7 @@ from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
 
 from raspi_robot.web_interface import WebInterface, app
-from raspi_robot.web_socket_handlers.log_handler import LogHandler
+from raspi_robot.web_socket_handler.log_handler import LogHandler
 from raspi_robot.robot import Robot
 from raspi_robot.log import Log
 

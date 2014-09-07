@@ -1,5 +1,5 @@
 
-from raspi_robot.pins.pins.arduino_pins.arduino_pin import ArduinoPin
+from raspi_robot.pin.pin.arduino_pin.arduino_pin import ArduinoPin
 
 
 class ArduinoInputPin(ArduinoPin):

@@ -1,7 +1,7 @@
 
 import wiringpi2 as wiringpi
 
-from raspi_robot.pins.pins.gpio_pins.gpio_pin import GPIOPin
+from raspi_robot.pin.pin.gpio_pin.gpio_pin import GPIOPin
 
 
 class GPIOOutputPin(GPIOPin):

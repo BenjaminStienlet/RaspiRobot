@@ -1,17 +1,18 @@
 
 import wiringpi2 as wiringpi
 
-from raspi_robot.pins.pins.gpio_pins.gpio_pin import GPIOPin
+from raspi_robot.pin.pin.gpio_pin.gpio_pin import GPIOPin
 
 
 class GPIOInputPin(GPIOPin):
+
     def __init__(self, pid):
         super(GPIOInputPin, self).__init__(pid)
         wiringpi.wiringPiSetupPhys()
-        wiringpi.pinMode(pid, 1)
+        wiringpi.pinMode(pid, 0)
 
     def write(self, value):
-        wiringpi.digitalWrite(self.pid, value)
+        pass
 
     def read(self):
-        pass
+        return wiringpi.digitalRead(self.pid)
