@@ -1,4 +1,4 @@
-from threading import Thread
+
 from tornado.wsgi import WSGIContainer
 from tornado.web import Application, FallbackHandler
 from tornado.websocket import WebSocketHandler
@@ -6,7 +6,9 @@ from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
 
 from raspi_robot.web_interface import WebInterface, app
+from raspi_robot.web_socket_handlers.log_handler import LogHandler
 from raspi_robot.robot import Robot
+from raspi_robot.log import Log
 
 
 robot = Robot()
@@ -19,18 +21,27 @@ def main():
         wsgi_app = WSGIContainer(app)
 
         application = Application([(r'/servo', ServoHandler), (r'/camera_servo', CameraServoHandler),
-                                   (r'/motor', MotorHandler), (r'.*', FallbackHandler, {'fallback': wsgi_app})])
+                                   (r'/motor', MotorHandler), (r'/log', LogHandler),
+                                   (r'.*', FallbackHandler, {'fallback': wsgi_app})])
+
+        # (r'/motor', MotorHandler, {'robot': robot})
+        # class MotorHandler(WebSocketHandler):
+        #   def __init__(self, *args, **kwargs):
+        #       self.robot = kwargs.pop('robot')
+
+        Log.instance().add_info_message('info')
+        Log.instance().add_check_message('check')
+        Log.instance().add_warning_message('warning')
+        Log.instance().add_error_message('error')
 
         print "starting HTTP server"
         http_server = HTTPServer(application)
         http_server.listen(8080)
         IOLoop.instance().start()
-        print "HTTP server started"
 
-        while True:
-            pass
     except (KeyboardInterrupt, SystemExit):
-        pass
+        print "exit"
+        Log.instance().add_warning_message('Closing the application')
 
 
 class ServoHandler(WebSocketHandler):

@@ -1,9 +1,10 @@
 
 function evenRows() {
-	$('#log_table tbody tr').each().removeClass('even');
-	$('#log_table tbody tr:even').addClass('even');
+	$('#log_table_body tr').removeClass('even').filter(':even').addClass('even');
 } 
 
 $(document).ready(evenRows);
 
-$('#log_table tbody').bind('DOMSubtreeModified', evenRows);
+var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+var obs = new MutationObserver(evenRows);
+obs.observe($('#log_table_body').get(0),{ childList: true, subtree: true });

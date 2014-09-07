@@ -1,7 +1,5 @@
 :root {
-  --main-bg-color: #eee;
-  --main-color: #377ba8;
-  --tr-even-color: #efefef;
+  --tr-even-color: #e0e0e0;
 }
 
 table {
@@ -19,38 +17,47 @@ th {
 	color: var(--main-color);
 	text-align: left;
 }
-tr:last-child {
+tr:last-child td {
 	border-bottom: 2px solid var(--main-color);
 }
 tr.even {
-	background-color: var(tr-even-color);
+	background: var(--tr-even-color);
 }
 .type {
-	width: 32px;
+
 }
 .time {
-	width: 64px;
+
 }
 .module {
-	width: 96px;
+	min-width: 200px;
+	max-width: 600px;
 }
 .description {
 	min-width: 200px;
 	max-width: 600px;
 }
 td.type.error {
-	background: url("images/error.png");
-	background-size: 32px;
+	background: url("../images/error.png");
+	background-size: 24px;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 td.type.warning {
-	background: url("images/warning.png");
-	background-size: 32px;
+	background: url("../images/warning.png");
+	background-size: 24px;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 td.type.check {
-	background: url("images/check.png");
-	background-size: 32px;
+	background: url("../images/check.png");
+	background-size: 24px;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 td.type.info {
-	background: url("images/info.png");
-	background-size: 32px;
+	background: url("../images/info.png");
+	background-size: 24px;
+	background-repeat: no-repeat;
+	background-position: center;
 }

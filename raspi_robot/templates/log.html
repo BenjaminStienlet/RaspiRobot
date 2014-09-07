@@ -6,14 +6,16 @@
 
 {% block body %}
 
-	<table id="log_table">
-		<tr>
-			<th class="type">Type</th>
-			<th class="time">Time</th>
-			<th class="module">Module</th>
-			<th class="description">Description</th>
-		</tr>
+	<table>
 		<tbody>
+			<tr>
+				<th class="type">Type</th>
+				<th class="time">Time</th>
+				<th class="module">Module</th>
+				<th class="description">Description</th>
+			</tr>
+		</tbody>
+		<tbody id="log_table_body">
 
 		</tbody>
 	</table>
@@ -22,7 +24,7 @@
 
 {% block scripts %}
 
-	<script src="js/log_listener.js"></script>
-	<script src="js/log_table.js"></script>
+	<script src="{{ url_for('static', filename='js/log_listener.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/log_table.js') }}"></script>
 
 {% endblock %}

@@ -1,14 +1,18 @@
 
+import socket
+import fcntl
+import struct
+
 from threading import Thread
 from flask import Flask, render_template
 from flask.ext.socketio import SocketIO, emit
 
-import socket
-
 
 app = Flask(__name__)
 
-ip_addr = socket.gethostbyname(socket.getfqdn())
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+ifname = 'wlan0'
+ip_addr = socket.inet_ntoa(fcntl.ioctl(s.fileno(), 0x8915, struct.pack('256s', ifname[:15]))[20:24])
 
 @app.route('/')
 def index():
