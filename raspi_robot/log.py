@@ -1,7 +1,7 @@
 import threading
 import inspect
 
-from time import gmtime, strftime
+from datetime import datetime
 
 
 class Log(object):
@@ -10,6 +10,7 @@ class Log(object):
     __singleton_instance = None
     __messages = []
     __observers = {}
+    __time = datetime.now()
 
     @classmethod
     def instance(cls):
@@ -20,7 +21,7 @@ class Log(object):
         return cls.__singleton_instance
 
     def __add_message(self, msg_type, msg):
-        time = strftime("%H:%M:%S", gmtime())
+        time = str(datetime.now() - self.__time)[:-3]
         frm = inspect.stack()[2]
         mod = inspect.getmodule(frm[0])
         if msg is not None:
