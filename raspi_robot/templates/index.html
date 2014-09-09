@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 
 {% block head %}
-  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style/stream.css') }}">
+  	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style/stream.css') }}">
 {% endblock %}
 
 {% block body %}
 
-  <p class="centeredImage"><img id="stream" src="http://{{ ip_addr }}:9000/?action=stream"></p>
+  	<p class="centeredImage"><img id="stream" src="http://{{ ip_addr }}:9000/?action=stream"></p>
 
 {% endblock %}
 
 {% block scripts %}
 
-  <script src="{{ url_for('static', filename='js/control.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/scale_image.js') }}"></script>
+  	<script src="{{ url_for('static', filename='js/control.js') }}"></script>
+  	<script src="{{ url_for('static', filename='js/scale_image.js') }}"></script>
 
 {% endblock %}

@@ -1,30 +1,35 @@
+
 $(document).ready(function(){
    
-    var ws_servo = new WebSocket("ws://192.168.0.33:8080/servo");
-    var ws_camera_servo = new WebSocket("ws://192.168.0.33:8080/camera_servo");
-    var ws_motor = new WebSocket("ws://192.168.0.33:8080/motor");
+    var ws_movement = new WebSocket('ws://' + ip_addr + ':8080/movement');
+    var movement_keys = {'w': 'F', 's': 'B', 'a': 'L', 'd': 'R'};
+    var movement_data = {'F': 0, 'B': 0, 'L': 0, 'R': 0};
+    var on_keydown = 1;
+    var on_keyup = 0;
+
+    function send_movement_data() {
+        console.info('WS movement: sending data');
+        ws_movement.send(JSON.stringify(movement_data));
+    }
     
-    ws_servo.onmessage = function (msg) {
-       ("div#angle").text(msg);
-    };   
-     
-    ws_camera_servo.onmessage = function (msg) {
-       ("div#camera_angle").text(msg);
-    };
-    
-    ws_motor.onmessage = function (msg) {
-       ("div#speed").text(msg);
+    ws_movement.onmessage = function (msg) {
+       console.info('WS movement message: ' + msg)
     };
 
-    $('#submit_angle').click(function(event) {
-        ws_servo.send($('#new_angle').val());
+    $(window).on('keydown', function(event) {
+        var key = event.key;
+        console.info('WS movement: key down: ' + key);
+        if (key in movement_keys) {
+            movement_data[movement_keys[key]] = on_keydown;
+            send_movement_data();
+        }
     });
 
-    $('#submit_camera_angle').click(function(event) {
-        ws_servo.send($('#new_camera_angle').val());
-    });
-
-    $('#submit_speed').click(function(event) {
-        ws_motor.send($('#new_speed').val());
+    $(window).on('keyup', function(event) {
+        var key = event.key;
+        if (key in movement_keys) {
+           movement_data[movement_keys[key]] = on_keyup;
+           send_movement_data();
+        }
     });
 });

@@ -7,13 +7,13 @@ e.g. python -m raspi_robot.test.servo_test 24 158 0.1 1
 import sys
 import time
 
-from raspi_robot.robot import Robot
+from raspi_robot.robot.robot_4wd import Robot4WD
 
 
 def test():
     arg = map(lambda x: float(x.strip("'")), sys.argv[1:])
 
-    servo = Robot().tilt_servo
+    servo = Robot4WD().steer_servo
 
     if arg[3]:
         for i in range(int(arg[0]), int(arg[1])+1):
