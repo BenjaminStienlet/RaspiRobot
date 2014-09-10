@@ -13,13 +13,13 @@ class Robot4WD(Robot):
 
     LIGHTS_PID = 5
 
-    MOTOR_ENABLE_PID = 12
+    MOTOR_ENABLE_PID = 3
     MOTOR_ORIENTATION_PID = (8, 10)
 
     def __init__(self):
         self.pin_layout = GPIOPinLayout()
-        self.steer_servo = Servo(self.pin_layout.create_servo_pin(self.STEER_PID))
-        self.tilt_servo = Servo(self.pin_layout.create_servo_pin(self.TILT_PID))
+        self.steer_servo = Servo(self.pin_layout.create_servo_pin(self.STEER_PID), 168, 80, 217)
+        self.tilt_servo = Servo(self.pin_layout.create_servo_pin(self.TILT_PID), 168, 80, 217)
 
         self.motor = Motor(self.pin_layout.create_pwm_pin(self.MOTOR_ENABLE_PID),
                            (self.pin_layout.create_output_pin(self.MOTOR_ORIENTATION_PID[0]),

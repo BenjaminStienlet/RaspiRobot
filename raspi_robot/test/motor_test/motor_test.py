@@ -10,15 +10,16 @@ import time
 from raspi_robot.robot.robot_4wd import Robot4WD
 
 
+motor = Robot4WD().motor
+
+
 def test():
     arg = map(lambda x: float(x.strip("'")), sys.argv[1:])
-
-    motor = Robot4WD().motor
 
     if arg[3]:
         for i in range(int(arg[0]), int(arg[1])+1):
             print "speed: %s" % i
-            motor.angle = i
+            motor.speed = i
             time.sleep(arg[2])
     else:
         motor.speed = int(arg[0])
@@ -31,4 +32,7 @@ def test():
 
 
 if __name__ == '__main__':
-    test()
+    try:
+        test()
+    except (KeyboardInterrupt, SystemExit):
+        motor.speed = 0

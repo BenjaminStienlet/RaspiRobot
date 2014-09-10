@@ -1,12 +1,11 @@
 
 class Servo(object):
 
-    MIN_ANGLE = 0       #24
-    MAX_ANGLE = 1023    #158
-
-    def __init__(self, pin, angle=0):
+    def __init__(self, pin, angle, min_angle, max_angle):
         self.pin = pin
         self._angle = 0
+        self.min_angle = min_angle
+        self.max_angle = max_angle
         self.angle = angle
 
     def turn_left(self, angle):
@@ -21,10 +20,10 @@ class Servo(object):
 
     @angle.setter
     def angle(self, angle):
-        if angle < self.MIN_ANGLE:
-            angle = self.MIN_ANGLE
-        if angle > self.MAX_ANGLE:
-            angle = self.MAX_ANGLE
+        if angle < self.min_angle:
+            angle = self.min_angle
+        if angle > self.max_angle:
+            angle = self.max_angle
 
         self._angle = angle
         self.pin.write(self.angle)
