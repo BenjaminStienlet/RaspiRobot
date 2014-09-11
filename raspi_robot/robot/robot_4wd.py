@@ -8,8 +8,8 @@ from raspi_robot.controller.movement_controller.motor_servo_movement_controller 
 
 class Robot4WD(Robot):
 
-    STEER_PID = 0
-    TILT_PID = 1
+    STEER_PID = 1
+    TILT_PID = 0
 
     LIGHTS_PID = 5
 
@@ -18,8 +18,8 @@ class Robot4WD(Robot):
 
     def __init__(self):
         self.pin_layout = GPIOPinLayout()
-        self.steer_servo = Servo(self.pin_layout.create_servo_pin(self.STEER_PID), 168, 80, 217)
-        self.tilt_servo = Servo(self.pin_layout.create_servo_pin(self.TILT_PID), 168, 80, 217)
+        self.steer_servo = Servo(self.pin_layout.create_servo_pin(self.STEER_PID), 147, 80, 217)
+        self.tilt_servo = Servo(self.pin_layout.create_servo_pin(self.TILT_PID), 152, 80, 217)
 
         self.motor = Motor(self.pin_layout.create_pwm_pin(self.MOTOR_ENABLE_PID),
                            (self.pin_layout.create_output_pin(self.MOTOR_ORIENTATION_PID[0]),
