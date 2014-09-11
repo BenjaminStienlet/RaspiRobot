@@ -8,6 +8,9 @@ echo "mjpg-streamer started"
 LD_LIBRARY_PATH=$mjpg_folder $mjpg_folder/mjpg_streamer -i "input_raspicam.so -x 640 -y 480 -fps 15 -vf -hf" -o "output_http.so -p 9000 -w $mjpg_folder/www" &
 sleep 4
 
+echo "servod started"
+servod
+
 echo ""
 echo "python script started"
 python -m raspi_robot

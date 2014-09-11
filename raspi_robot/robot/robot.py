@@ -9,3 +9,7 @@ class Robot(object):
     def __init__(self, movement_controller, camera_controller):
         self.movement_controller = movement_controller
         self.camera_controller = camera_controller
+
+    @abstractmethod
+    def stop(self):
+        pass

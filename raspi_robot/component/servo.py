@@ -1,12 +1,13 @@
 
 class Servo(object):
 
-    def __init__(self, pin, angle, min_angle, max_angle):
+    def __init__(self, pin, neutral_angle, min_angle, max_angle):
         self.pin = pin
         self._angle = 0
+        self.neutral_angle = neutral_angle
         self.min_angle = min_angle
         self.max_angle = max_angle
-        self.angle = angle
+        self.angle = self.neutral_angle
 
     def turn_left(self, angle):
         self.angle -= angle

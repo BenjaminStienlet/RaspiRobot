@@ -16,6 +16,7 @@ $(document).ready(function(){
        console.info('WS movement message: ' + msg)
     };
 
+    //--------- KEYBOARD CONTROLS ---------//
     $(window).on('keydown', function(event) {
         var key = event.key;
         console.info('WS movement: key down: ' + key);
@@ -32,4 +33,8 @@ $(document).ready(function(){
            send_movement_data();
         }
     });
+
+    //--------- TOUCHSCREEN CONTROLS ---------//
+
+    //--------- GAMEPAD CONTROLS ---------//
 });

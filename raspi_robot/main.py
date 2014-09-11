@@ -38,5 +38,6 @@ def main():
 
     except (KeyboardInterrupt, SystemExit):
         print "exit"
+        robot.stop()
         Log.instance().add_warning_message('Closing the application')
         time.sleep(2)
