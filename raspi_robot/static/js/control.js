@@ -2,13 +2,10 @@
 $(document).ready(function(){
    
     var ws_movement = new WebSocket('ws://' + ip_addr + ':8080/movement');
-    var movement_keys = {'w': 'F', 's': 'B', 'a': 'L', 'd': 'R'};
+
     var movement_data = {'F': 0, 'B': 0, 'L': 0, 'R': 0};
-    var on_keydown = 1;
-    var on_keyup = 0;
 
     function send_movement_data() {
-        console.info('WS movement: sending data');
         ws_movement.send(JSON.stringify(movement_data));
     }
     
@@ -17,6 +14,10 @@ $(document).ready(function(){
     };
 
     //--------- KEYBOARD CONTROLS ---------//
+    var movement_keys = {'w': 'F', 's': 'B', 'a': 'L', 'd': 'R'};
+    var on_keydown = 1;
+    var on_keyup = 0;
+
     $(window).on('keydown', function(event) {
         var key = event.key;
         console.info('WS movement: key down: ' + key);
