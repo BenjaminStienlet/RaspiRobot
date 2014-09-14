@@ -8,10 +8,6 @@ from raspi_robot.controller.camera_controller.pan_camera_controller import PanCa
 
 class PanTiltCameraController(PanCameraController):
 
-    SERVO_ANGLE_INC_PS = 40
-    SERVO_TIME_INTERVAL = 0.2
-    SERVO_MULTIPLIER = 2
-
     def __init__(self, pan_servo, tilt_servo, pan_offset=0, tilt_offset=0):
         super(PanTiltCameraController, self).__init__(pan_servo, pan_offset)
         self.tilt_servo = tilt_servo

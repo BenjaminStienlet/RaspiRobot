@@ -1,4 +1,8 @@
-
+#page {
+	position: relative;
+	margin: 0px;
+	width: 100%;
+}
 .centeredImage { 
 	text-align: center; 
 	vertical-align: middle;
