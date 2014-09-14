@@ -24,8 +24,6 @@ function scaleImage() {
 
 	stream.attr('height', new_size['height']);
 	stream.attr('width', new_size['width']);
-
-  	console.info('width=' + stream.width() + ', height=' + stream.height());
 };
 
 $(document).ready(scaleImage);

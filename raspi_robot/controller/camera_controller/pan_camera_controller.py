@@ -14,7 +14,7 @@ class PanCameraController(CameraController):
 
     def __init__(self, pan_servo, pan_offset=0):
         self.pan_servo = pan_servo
-        self.pan_offset = pan_offset
+        self.pan_servo_offset = pan_offset
         self.pan_angle_diff = 0
 
         def pan_servo_function():

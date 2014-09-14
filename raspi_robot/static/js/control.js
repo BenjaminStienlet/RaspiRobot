@@ -4,9 +4,20 @@ $(document).ready(function(){
     var ws_movement = new WebSocket('ws://' + ip_addr + ':8080/movement');
 
     var movement_data = {'F': 0, 'B': 0, 'L': 0, 'R': 0};
+    
+    var send_treshold = 0.05;
 
-    function send_movement_data() {
-        ws_movement.send(JSON.stringify(movement_data));
+    function send_movement_data(new_movement_data) {
+        var send = false;
+        for (var key in movement_data) {
+            if (Math.abs(movement_data[key] - new_movement_data[key]) > send_treshold) {
+                send = true;
+            }
+        }
+        if (send) {
+            movement_data = jQuery.extend({}, new_movement_data);
+            ws_movement.send(JSON.stringify(movement_data));
+        }
     }
     
     ws_movement.onmessage = function (msg) {
@@ -20,18 +31,19 @@ $(document).ready(function(){
 
     $(window).on('keydown', function(e) {
         var key = e.key;
-        console.info('WS movement: key down: ' + key);
         if (key in movement_keys) {
-            movement_data[movement_keys[key]] = on_keydown;
-            send_movement_data();
+            var new_movement_data = jQuery.extend({}, movement_data);
+            new_movement_data[movement_keys[key]] = on_keydown;
+            send_movement_data(new_movement_data);
         }
     });
 
     $(window).on('keyup', function(e) {
         var key = e.key;
         if (key in movement_keys) {
-           movement_data[movement_keys[key]] = on_keyup;
-           send_movement_data();
+           var new_movement_data = jQuery.extend({}, movement_data);
+           new_movement_data[movement_keys[key]] = on_keyup;
+           send_movement_data(new_movement_data);
         }
     });
 
@@ -49,22 +61,22 @@ $(document).ready(function(){
 
         var el;
         if (x < $(window).width() / 2) {
-            el = $('move_circle');
+            el = $('#move_circle');
             move_location = {'x': x, 'y': y};
         }
         else {
-            el = $('camera_circle');
+            el = $('#camera_circle');
             camera_location = {'x': x, 'y': y};
         }
 
         el.removeClass('hidden');
 
         el.css({
-            height: 2 * circle_radius,
-            width: 2 * circle_radius,
-            position: absolute,
-            top: y - circle_radius,
-            left: x - circle_radius
+            "height": 2 * circle_radius,
+            "width": 2 * circle_radius,
+            "position": absolute,
+            "top": y - circle_radius,
+            "left": x - circle_radius
         }); 
     });
 
@@ -72,14 +84,15 @@ $(document).ready(function(){
         e.preventDefault();
         
         if (x < $(window).width() / 2) {
-            el = $('move_circle');
+            el = $('#move_circle');
             move_location = {};
         }
         else {
-            el = $('camera_circle');
+            el = $('#camera_circle');
             camera_location = {};
         }
 
+        el.removeAttr("style");
         el.addClass('hidden');
     });
 
@@ -96,31 +109,50 @@ $(document).ready(function(){
         if (x < $(window).width() / 2) {
             x_diff = x - move_location['x'];
             y_diff = y - move_location['y'];
+            
+            if (x_diff > circle_radius) {
+                x_diff = circle_radius;
+            }
+            if (y_diff > circle_radius) {
+                y_diff = circle_radius;
+            }
+            
+            if (x_diff < -circle_radius) {
+                x_diff = -circle_radius;
+            }
+            if (y_diff < -circle_radius) {
+                y_diff = -circle_radius;
+            }
+            
+            x_diff /= circle_radius;
+            y_diff /= circle_radius;
+            
+            var new_movement_data = {};
+            if (x_diff > 0) {
+                new_movement_data['R'] = x_diff;
+                new_movement_data['L'] = 0;
+            }
+            else {
+                new_movement_data['L'] = -x_diff;
+                new_movement_data['R'] = 0;
+            }
+
+            if (y_diff > 0) {
+                new_movement_data['B'] = y_diff;
+                new_movement_data['F'] = 0;
+            }
+            else {
+                new_movement_data['F'] = -y_diff;
+                new_movement_data['B'] = 0;
+            }
+
+            send_movement_data(new_movement_data);
+            
         }
         else {
             x_diff = x - camera_location['x'];
             y_diff = y - camera_location['y'];
         }
-
-        if (x_diff > 0) {
-            movement_data['R'] = x_diff;
-            movement_data['L'] = 0;
-        }
-        else {
-            movement_data['L'] = x_diff;
-            movement_data['R'] = 0;
-        }
-
-        if (y_diff > 0) {
-            movement_data['F'] = y_diff;
-            movement_data['B'] = 0;
-        }
-        else {
-            movement_data['B'] = y_diff;
-            movement_data['F'] = 0;
-        }
-
-        send_movement_data();
     });
 
     //--------- GAMEPAD CONTROLS ---------//

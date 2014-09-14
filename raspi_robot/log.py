@@ -29,6 +29,7 @@ class Log(object):
             self.__messages.append(message)
             for observer in self.__observers.keys():
                 self.__observers[observer].append(message)
+            self.notify_observers()
 
     def add_info_message(self, msg):
         self.__add_message('info', msg)
