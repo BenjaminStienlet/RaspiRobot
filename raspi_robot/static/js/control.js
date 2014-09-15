@@ -72,20 +72,27 @@ $(document).ready(function(){
         el.removeClass('hidden');
 
         el.css({
-            "height": 2 * circle_radius,
-            "width": 2 * circle_radius,
-            "position": absolute,
-            "top": y - circle_radius,
-            "left": x - circle_radius
+            "height": (2 * circle_radius),
+            "width": (2 * circle_radius),
+            "position": "absolute",
+            "top": (y - circle_radius),
+            "left": (x - circle_radius)
         }); 
     });
 
     $('#page').bind('touchend', function(e){
         e.preventDefault();
         
+        var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+        var x = touch.pageX;
+        var y = touch.pageY;
+
+        var el;
         if (x < $(window).width() / 2) {
             el = $('#move_circle');
             move_location = {};
+            var new_movement_data = {'F': 0, 'B': 0, 'L': 0, 'R': 0};
+            send_movement_data(new_movement_data);
         }
         else {
             el = $('#camera_circle');
@@ -110,6 +117,7 @@ $(document).ready(function(){
             x_diff = x - move_location['x'];
             y_diff = y - move_location['y'];
             
+            // TODO: limit to circle instead of square
             if (x_diff > circle_radius) {
                 x_diff = circle_radius;
             }
